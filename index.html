@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Hey You ❤️</title>
+
+<style>
+
+body{
+    height:100vh;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    flex-direction:column;
+    background:#ffd6e0;
+    font-family: 'Arial', sans-serif;
+    text-align:center;
+    overflow:hidden;
+}
+
+h1{
+    font-size:28px;
+    margin-bottom:40px;
+}
+
+button{
+    padding:18px 32px;
+    font-size:20px;
+    border:none;
+    border-radius:12px;
+    cursor:pointer;
+}
+
+#yes{
+    background:#ff4d6d;
+    color:white;
+}
+
+#no{
+    background:#444;
+    color:white;
+    position:absolute;
+}
+
+</style>
+</head>
+
+<body>
+
+<h1>Will you be my Valentine? 💖</h1>
+
+<button id="yes">YES 😍</button>
+<button id="no">NO 🙈</button>
+
+<script>
+
+const noBtn = document.getElementById("no");
+
+// Random starting position
+function placeButton(){
+    const width = window.innerWidth - 120;
+    const height = window.innerHeight - 60;
+
+    noBtn.style.left = Math.random()*width + "px";
+    noBtn.style.top = Math.random()*height + "px";
+}
+
+placeButton();
+
+// Move when finger gets close
+document.addEventListener("touchstart", function(e){
+
+    const touch = e.touches[0];
+
+    const rect = noBtn.getBoundingClientRect();
+
+    const distance = Math.hypot(
+        touch.clientX - (rect.left + rect.width/2),
+        touch.clientY - (rect.top + rect.height/2)
+    );
+
+    // If finger is near → RUN 😆
+    if(distance < 120){
+        placeButton();
+    }
+
+});
+
+// YES click magic
+document.getElementById("yes").onclick = function(){
+    document.body.innerHTML = `
+        <h1>YAYYYYY ❤️</h1>
+        <h2>You just made me the happiest person alive 🥹</h2>
+        <p>Now get ready… date incoming 😌</p>
+    `;
+}
+
+</script>
+
+</body>
+</html>
